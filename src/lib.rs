@@ -39,7 +39,7 @@ mod types;
 
 pub use engine::Regex;
 pub use parser::ParseError;
-pub use types::{NodeFlags, RegexNodeId, StateFlags, ASCII_RANGE, BYTE_RANGE};
+pub use types::{Match, NodeFlags, RegexNodeId, StateFlags, ASCII_RANGE, BYTE_RANGE};
 
 /// Result type for regex operations
 pub type Result<T> = std::result::Result<T, Error>;
