@@ -1,5 +1,5 @@
-[submodule "benchmarks/rebar"]
-	path = benchmarks/rebar
+[submodule "testdata/rebar"]
+	path = testdata/rebar
 	url = https://github.com/BurntSushi/rebar.git
 [submodule "testdata/regex-crate"]
 	path = testdata/regex-crate

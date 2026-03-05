@@ -14,7 +14,7 @@ use std::time::Duration;
 
 /// Load a haystack file from the rebar benchmarks directory.
 fn load_haystack(relative_path: &str) -> String {
-    let path = Path::new("benchmarks/rebar/benchmarks/haystacks").join(relative_path);
+    let path = Path::new("testdata/rebar/benchmarks/haystacks").join(relative_path);
     fs::read_to_string(&path).unwrap_or_else(|e| panic!("Failed to read {}: {}", path.display(), e))
 }
 

@@ -24,9 +24,9 @@ open Resharp
 let loadHaystack (relativePath: string) =
     // Adjust path based on where the script is run from
     let paths = [
-        Path.Combine("benchmarks/rebar/benchmarks/haystacks", relativePath)
-        Path.Combine("../benchmarks/rebar/benchmarks/haystacks", relativePath)
-        Path.Combine("../../resharp_rs/benchmarks/rebar/benchmarks/haystacks", relativePath)
+        Path.Combine("testdata/rebar/benchmarks/haystacks", relativePath)
+        Path.Combine("../testdata/rebar/benchmarks/haystacks", relativePath)
+        Path.Combine("../../resharp_rs/testdata/rebar/benchmarks/haystacks", relativePath)
     ]
     paths
     |> List.tryFind File.Exists
