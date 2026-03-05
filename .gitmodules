@@ -1,0 +1,6 @@
+[submodule "benchmarks/rebar"]
+	path = benchmarks/rebar
+	url = https://github.com/BurntSushi/rebar.git
+[submodule "testdata/regex-crate"]
+	path = testdata/regex-crate
+	url = https://github.com/rust-lang/regex.git

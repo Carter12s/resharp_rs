@@ -1,0 +1,29 @@
+[package]
+name = "resharp_rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["Ievgenii Shcherbina <ieviev@users.noreply.github.com>"]
+description = "A high-performance, automata-based regex engine with intersection and complement operations"
+license = "MIT"
+repository = "https://github.com/ieviev/resharp_rs"
+keywords = ["regex", "dfa", "automata", "intersection", "complement"]
+categories = ["text-processing"]
+
+[dependencies]
+memchr = "2.8.0"
+rustc-hash = "2.1.1"
+
+[dev-dependencies]
+criterion = { version = "0.8.2", features = ["html_reports"] }
+regex = "1.12"
+rustc-hash = "2.1.1"
+serde = { version = "1.0.228", features = ["derive"] }
+toml = "1.0.3"
+
+[[bench]]
+name = "rebar_benchmarks"
+harness = false
+
+[[bench]]
+name = "comparative_benchmarks"
+harness = false
