@@ -92,6 +92,57 @@ Results on a 60KB text corpus (Intel Core i9-14900K):
 - **rust regex** uses SIMD acceleration and specialized engines (Aho-Corasick for alternations, memchr for literals)
 - resharp_rs excels at patterns with large character classes where NFA simulation is slower
 
+## Work in Progress
+
+This project is under active development. Below is the current status of features and known limitations.
+
+### Unsupported Features
+
+| Feature                            | Status             | Notes                                        |
+| ---------------------------------- | ------------------ | -------------------------------------------- |
+| Case-insensitive matching (`(?i)`) | ❌ Not implemented | Inline flags like `(?i)` are not supported   |
+| Multiline mode (`(?m)`)            | ❌ Not implemented | `^` and `$` only match start/end of string   |
+| Dot-all mode (`(?s)`)              | ❌ Not implemented | Use `_` (universal wildcard) instead         |
+| Unicode mode (`(?u)`)              | ❌ Not implemented | ASCII-only matching currently                |
+| Word boundaries (`\b`, `\B`)       | ⚠️ Partial         | Basic support, but fails with inline flags   |
+| Lookahead/Lookbehind               | ❌ Not implemented | Not yet ported from original RE#             |
+| Named capture groups               | ❌ Not implemented | `(?P<name>...)` not supported                |
+| Backreferences                     | ❌ Not supported   | Fundamentally incompatible with DFA approach |
+| Possessive quantifiers             | ❌ Not implemented | `*+`, `++`, etc.                             |
+| Atomic groups                      | ❌ Not implemented | `(?>...)`                                    |
+
+### Semantic Differences (by design)
+
+These are intentional differences from PCRE-style engines like Rust's `regex` crate:
+
+| Behavior                      | resharp_rs             | PCRE-style               |
+| ----------------------------- | ---------------------- | ------------------------ |
+| Match semantics               | POSIX leftmost-longest | Leftmost-first           |
+| Lazy quantifiers (`*?`, `+?`) | Treated as greedy      | Actually lazy            |
+| Empty alternations (`\|b`)    | Matches `b` (longest)  | Matches empty (leftmost) |
+
+### Skipped Test Cases
+
+The following test categories from `rust-lang/regex` are currently skipped:
+
+- **Semantic differences** (16 tests): Empty alternation and lazy quantifier tests that expect PCRE semantics
+- **Missing features** (6 tests): Tests requiring `(?m)`, `(?i-u)`, or complex `\b` patterns
+- **State explosion** (1 test): `email-big` pattern causes exponential DFA growth
+
+### Planned Optimizations
+
+- [ ] **SIMD-accelerated character class matching** — Currently uses scalar code for `[a-zA-Z]` style classes
+- [ ] **Better alternation handling** — Aho-Corasick for literal alternations like `foo|bar|baz`
+- [ ] **Lazy DFA construction** — Currently pre-computes up to 1024 states; could be smarter
+- [ ] **Memory-mapped large DFAs** — For patterns that exceed memory limits
+- [ ] **Streaming/incremental matching** — Match as input arrives
+
+### Other Known Issues
+
+- Complex patterns with many character classes can cause slow compilation
+- Very large character classes (Unicode ranges) not yet optimized
+- No regex syntax validation beyond parse errors (e.g., no warnings for likely mistakes)
+
 ## Credits
 
 This is a Rust port of the [RE# regex engine](https://github.com/ieviev/resharp-dotnet) by **Ievgenii Shcherbina**, implementing the algorithms described in:
