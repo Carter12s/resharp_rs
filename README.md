@@ -1,8 +1,10 @@
 # resharp_rs
 
-[![CI](https://github.com/ieviev/resharp_rs/actions/workflows/ci.yml/badge.svg)](https://github.com/ieviev/resharp_rs/actions/workflows/ci.yml)
+[![CI](https://github.com/Carter12s/resharp_rs/actions/workflows/ci.yml/badge.svg)](https://github.com/Carter12s/resharp_rs/actions/workflows/ci.yml)
 [![Crates.io](https://img.shields.io/crates/v/resharp_rs.svg)](https://crates.io/crates/resharp_rs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+DISCLAIMER: THIS IS EXPERIMENTAL AND HAS JUST BEGUN ITS DEVELOPMENT, WE HOPE THIS PROJECT CAN GROW INTO A STABLE REGEX IMPLEMENTATION, BUT FOR NOW USE WITH CAUTION.
 
 A high-performance regex engine implementing **Brzozowski derivatives** with first-class support for **intersection** and **complement** operations.
 
